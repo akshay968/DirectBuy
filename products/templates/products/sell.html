@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block body%}
+ <div>
+    <a href="{% url 'add_product' %}" class="btn btn-block btn-primary">Add Product </a>
+</div>
+<div class="row">
+{%for product in products%}
+<div class="col-md-4">
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{product.image.url}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          {% comment %} <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
+        </div>
+        {% comment %} <ul class="list-group list-group-flush">
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul> {% endcomment %}
+        <div class="card-body">
+          <a href="#" class="card-link">view Product</a>
+          <a href="{% url 'edit_product' product.pk%}" class="card-link">Edit Product</a>
+        </div>
+      </div>
+</div>
+{%endfor%}
+</div>
+{% endblock%}

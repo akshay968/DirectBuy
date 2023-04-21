@@ -1,10 +1,11 @@
 from django.urls import path,include
-
+from . import views
 urlpatterns = [
      # Authentication
-    # path('register/', views.register, name='register'),
-    # path('login/', views.login, name='login'),
-    # path('logout/', views.logout, name='logout'),
+  
+    path('login/', views.login.as_view(), name='login'),
+    path('logout/', views.logout, name='logout'),
+    path('signup/', views.signup.as_view(), name='signup'),
 
     # # User Profile
     # path('dashboard/', views.dashboard, name='dashboard'),
@@ -14,8 +15,8 @@ urlpatterns = [
     # path('order_detail/<int:order_id>/', views.order_detail, name='order_detail'),
     # path('', views.dashboard, name='dashboard'),
 
-    # # Activation
-    # path('activate/<uidb64>/<token>/', views.activate, name='activate'),
+    # Activation
+    path('activate/<uidb64>/<token>/', views.activate, name='activate'),
 
     # # Forgot Password
     # path('forgotPassword/', views.forgotPassword, name='forgotPassword'),

@@ -1,0 +1,59 @@
+{% load static %}
+<nav class="navbar ps-4 pe4 border-bottom navbar-expand-lg navbar-light bg-light d-flex">
+    <div class="container-fluid d-flex">
+        <a class="navbar-brand p-2" href="#">
+            <img src="logo.png" width="50px" alt="">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+
+            <div class="justify-content-end">
+                <form class="d-flex form  rounded p-1">
+                    <input class="form-control me-2" type="search"  aria-label="Search">
+                    <button class="btn btn-search" type="submit">
+                        <img src="search.png" width="20px" alt="">
+                    </button>
+                </form>
+            </div>
+            
+            {% if request.user.id is None %}
+            <a href="{% url 'signup' %}" class="btn ms-3 ps-3 pe-3 btn-outline-db">Sign Up</a>
+            <a href="{% url 'login' %}" class="btn ms-3 ps-3 pe-3 btn-outline-db">Login</a>
+          
+            {% else %}
+
+            <a href="{% url 'sell' %}" class="btn ms-3 ps-3 pe-3 btn-outline-db">Sell</a>
+            
+            <a href="#" class="btn ms-3 ps-3 pe-3 btn-outline-db">Chat</a>
+          
+            <div class="btn rounded-circle btn-profile pt-2 pb-2">
+                AK
+            </div>
+            <a href="{% url 'logout' %}"> Logout</a>
+            {% endif %}
+
+
+
+            {% comment %} <div class="btn cart-btn ps-3 pe-3 ms-4 me-4"> {% endcomment %}
+                <a href="{% url 'cart' %}" class="btn ms-3 ps-3 pe-3 btn-outline-db">CART</a>
+            {% comment %} </div> {% endcomment %}
+        </div>
+         
+
+
+    </div>
+</nav>
+<div class="category_nav">
+  <div >
+    {% for category in links %}
+        <a href='{{category.get_url}}'>{{ category.category_name }}</a>
+    {%endfor%}
+  </div>
+
+</div>

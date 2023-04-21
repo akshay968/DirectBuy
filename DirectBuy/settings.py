@@ -31,13 +31,20 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'razorpay',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap5',
     'accounts',
+    'products',
+    'order',
+    'cart',
+    
+
 ]
 
 MIDDLEWARE = [
@@ -55,7 +62,7 @@ ROOT_URLCONF = 'DirectBuy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'products.context_processors.category_links',
             ],
         },
     },
@@ -125,3 +133,13 @@ MEDIA_URL='data-media/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+#smtp configuration'
+EMAIL_USE_TLS=True
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='directbuydjango@gmail.com'
+EMAIL_HOST_PASSWORD='jgsuaknlzptmiauc'
+EMAIL_PORT=587
+
+#razorpay settings
+RAZOR_KEY_ID = "rzp_test_E1KoVM2Xw6oJZL"
+RAZOR_KEY_SECRET = "SAPZNtfdAEMlPZbXCc3KBZsu"

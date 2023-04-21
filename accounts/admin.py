@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 # Register your models here.
 
 class AccountAdmin(UserAdmin):
-    list_display = ('username', 'first_name', 'last_name', 'email', 'date_joined', 'is_active')
+    list_display = ('username', 'first_name', 'last_name', 'email', 'password','date_joined', 'is_active')
     list_display_links = ('email', 'username')
     readonly_fields = ('last_login', 'date_joined')
     ordering = ('-date_joined',)

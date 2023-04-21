@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+{% block body %}
+<form method='POST'  action="{{reverse_url}} " enctype="multipart/form-data" >
+{% csrf_token %}
+ {{product_form.as_p}}
+ {% if product_form.errors %}
+  <ul>
+    {% for error in product_form.errors %} 
+      <li>{{ error }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}  
+
+ <table>
+    {{ variant_form.management_form }}
+
+  {% for variants in variant_form %}
+  {{variants.as_table}}
+  
+  {% endfor %}
+  
+ </table>
+ <button type=submit>add product</button>
+</form>
+
+{%endblock%}
