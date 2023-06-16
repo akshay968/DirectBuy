@@ -6,6 +6,7 @@ from .models import Cart,CartItem
 from django.shortcuts import redirect
 from .forms import CheckoutForm
 # Create your views here.
+
 def _cart_id(request):
     cart=request.session.session_key
     if not cart:
@@ -15,7 +16,7 @@ def _cart_id(request):
 def index(request):
     variant=None
     cart=None
-    cart_item=None
+    cart_items=None
     current_user=request.user
     tax = 0
     grand_total = 0
@@ -51,7 +52,6 @@ def index(request):
     return render(request, 'cart/cart.html', context)
 
 def add_cart(request,product_id,variant_id,quantity):
-   
     product=Product.objects.get(pk=product_id)
     variant=None
     cart=None
@@ -65,8 +65,6 @@ def add_cart(request,product_id,variant_id,quantity):
     if current_user.is_authenticated:
      try:
         cart_item= CartItem.objects.get(user=current_user,product=product,variant=variant) 
-        # cart_item.save(commit=False)
-        
         cart_item.quantity+=quantity 
         cart_item.save()
      except:

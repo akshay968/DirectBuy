@@ -26,7 +26,6 @@ def index(request,category_slug=None):
         category_model=get_object_or_404(Category,slug=category_slug)
         allproducts=Product.objects.filter(category=category_model)
         count=allproducts.count()
-            
     # print(allproducts[0])
     return render(request,'products/index.html',{ 'products':allproducts ,'products_count':count} )
 @login_required(login_url='login')
@@ -52,7 +51,7 @@ def add_product(request):
                 variant.product = product
                 variant.save()
 
-            return HttpResponse('Product added successfully!')
+            return redirect('sell')
 
         else:
         # Create an empty form instance and formset instance
@@ -62,10 +61,8 @@ def add_product(request):
              }  
              return render(request,'products/add_product.html',context)  
     else:
-        
         product_form=ProductForm()
         variant_form=VariantFormSet(queryset=Variant.objects.none())
-
         context={
             'product_form':product_form,
             'variant_form':variant_form
@@ -79,8 +76,7 @@ def edit_product(request,pk):
 
     product=get_object_or_404(Product,pk=pk)   
     print(request.method)
-    if request.method=='POST':
-         
+    if request.method=='POST':  
         product_form=ProductForm(request.POST,instance=product)
         variant_formset=VariantFormSet(request.POST,queryset=Variant.objects.filter(product=product))
         if product_form.is_valid() and variant_formset.is_valid():
@@ -89,7 +85,6 @@ def edit_product(request,pk):
             product.save()
             for variant_form in variant_formset:
                if variant_form.is_valid():
-                  
                    variant = variant_form.save(commit=False)
                    variant.product = product
                    variant.save()
@@ -101,7 +96,7 @@ def edit_product(request,pk):
                     deleted_form.instance.delete()
           
     
-            return HttpResponse("edited") 
+            return redirect('sell')
         else:
             revere_url=reverse('edit_product',args=[pk])
             context={

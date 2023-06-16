@@ -24,14 +24,13 @@ SECRET_KEY = 'django-insecure-#o-9j#ad*rze6$xs5$+p=gxuj7rp==y@=j0kbkiqjg_s#esn5x
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'razorpay',
+    'channels',
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,8 +42,7 @@ INSTALLED_APPS = [
     'products',
     'order',
     'cart',
-    
-
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +54,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 ROOT_URLCONF = 'DirectBuy.urls'
 
 TEMPLATES = [
@@ -76,7 +78,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'DirectBuy.wsgi.application'
+# WSGI_APPLICATION = 'DirectBuy.wsgi.application'
+ASGI_APPLICATION = 'DirectBuy.asgi.application'
+
 
 AUTH_USER_MODEL='accounts.Account'
 
@@ -126,7 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_DIR=['static']
+STATICFILES_DIRS=['static']
 MEDIA_ROOT='media/'
 MEDIA_URL='data-media/'
 # Default primary key field type
