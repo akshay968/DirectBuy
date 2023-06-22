@@ -4,17 +4,17 @@ from products.models import Product,Variant
 # Create your models here.
 
 class Payment(models.Model):
-    user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    user = models.ForeignKey(Account, on_delete=models.CASCADE,related_name='user')
+    vendor = models.ForeignKey(Account, on_delete=models.CASCADE,related_name='vendor',null=True,blank=True)
     payment_id = models.CharField(max_length=100)
     payment_method = models.CharField(max_length=100)
     amount_paid = models.CharField(max_length=100) # this is the total amount paid
     status = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return self.payment_id
-
-
+    
 class ShippingAddress(models.Model):
      name=models.CharField(max_length=30, null=True, blank=True)
      mobilenumber= models.CharField(max_length=15)
@@ -26,9 +26,10 @@ class ShippingAddress(models.Model):
      state=models.CharField(max_length=10)
      addresstype=models.BooleanField(default=0)
      user=models.ForeignKey(Account,on_delete=models.CASCADE,related_name='Addresses')
+
 class Order(models.Model):
             user = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True)
-            payment = models.ForeignKey(Payment, on_delete=models.SET_NULL, blank=True, null=True)
+            payment = models.OneToOneField(Payment, on_delete=models.SET_NULL, blank=True, null=True,related_name='order',unique=True)
             order_number = models.CharField(max_length=20)
             first_name = models.CharField(max_length=50)
             last_name = models.CharField(max_length=50)
@@ -51,6 +52,8 @@ class OrderedProduct(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE,related_name='order_user')
     vendor = models.ForeignKey(Account, on_delete=models.CASCADE,related_name='order_vendor')
     order= models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
+    is_rated=models.BooleanField(blank=True,default=False)
+    rating = models.FloatField(default=0)
     STATUS = (
             ('New','New'),
             ('OrderReceived', 'OrderReceived'),
@@ -65,7 +68,6 @@ class OrderedProduct(models.Model):
     ordered = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    shipping_address=models.ForeignKey(ShippingAddress,on_delete=models.SET_NULL,null=True)
     
     def __str__(self):
         return self.product.product_name    

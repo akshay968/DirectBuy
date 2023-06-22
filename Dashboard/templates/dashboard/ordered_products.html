@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<section class="section-conten padding-y bg">
+
+{% comment %} {% include 'includes/alerts.html' %} {% endcomment %}
+<div class="container">
+	<div class="row">
+	{% include 'includes/dashboard_sidebar.html' %}
+	<main class="col-md-9">
+		<article class="card">
+		<header class="card-header">
+			<strong class="d-inline-block mr-3">Your order history</strong>
+
+		</header>
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+            
+                    {% for item in ordered_products%}
+                    <tbody>
+                    <tr>
+                    <td width="65">
+                        <img src="images/items/1.jpg" class="img-xs border">
+                    </td>
+                    <td> 
+                        <p class="title mb-0">{{item.product.name}}</p>
+                        {% if item.variant %}
+                        <p class="title mb-0">{{item.variant.variant_name}}</p>
+                         {%endif%}
+                        <var class="price text-muted">USD{{item.product_price}} </var>
+                    </td>
+                   
+                    <td> {{item.vendor.name}} </td>
+
+                    <td width="200"> <div id="reviewFormPopup" style="display: none;">
+                        <form id="reviewForm" method="post" action="">
+                          <!-- Form fields for rating, review text, etc. -->
+                          <input type="hidden" name="product_id" id="productID" value="">
+                          <input type="text" name="review" id="reviewText" placeholder="Enter your review">
+                          <input type="number" name="rating" id="ratingInput" min="1" max="5" placeholder="Enter rating (1-5)">
+                          <button type="submit">Submit Review</button>
+                        </form>
+                      </div>  
+                      <button id="rateProductBtn">Rate the Product</button>
+
+                    <form  method="POST" action="{% url 'contact_vendor' vendor_id=item.vendor.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                        <!-- other form fields here -->
+                        <td width="200"> <button><type ="submit" class="btn ">contact Vendor</button>  
+                    </form>
+
+                    
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody></table>
+            </div>
+		</article> <!-- order-group.// -->
+	</main>
+</div> <!-- row.// -->
+</div>
+
+
+</section>
+
+{% endblock %}
+
+{%block js%}
+<!-- Add the following button/link to trigger the pop-up form -->
+
+
+<!-- Include the JavaScript code at the end of the template -->
+<script>
+  // JavaScript code to handle the pop-up form behavior
+  document.getElementById('rateProductBtn').addEventListener('click', function() {
+    document.getElementById('reviewFormPopup').style.display = 'block';
+    document.getElementById('productID').value = '{{ product.id }}';
+    document.getElementById('rateProductBtn').style.display='none'
+  });
+</script>
+{%endblock%}

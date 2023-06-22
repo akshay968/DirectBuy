@@ -2,6 +2,7 @@ from .models import Product,Variant
 from django.forms.models import inlineformset_factory 
 from django import forms
 from .models import Variant
+from products.models import ReviewRating
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
@@ -47,3 +48,10 @@ class CartItemForm(forms.Form):
         if variant.product_id != self.product_id:
             raise forms.ValidationError("Invalid variant selected.")
         return variant
+    
+
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model:ReviewRating
+        fields=['subject','review','rating']

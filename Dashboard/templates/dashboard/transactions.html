@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<section class="section-conten padding-y bg">
+{% comment %} {% include 'includes/alerts.html' %} {% endcomment %}
+<div class="container">
+	<div class="row">
+	{% include 'includes/dashboard_sidebar.html' %}
+	<main class="col-md-9">
+		<article class="card">
+		<header class="card-header">
+			<strong class="d-inline-block mr-3">Your Transactions</strong>
+
+		</header>
+		<div class="card-body">
+			<div class="row">
+			<div class="col-md-12">
+				<table class="table table-hover">
+				  <thead>
+				    <tr>
+				      <th scope="col">payment Id #</th>
+				      <th scope="col">order ID</th>
+				      <th scope="col">User</th>
+				      <th scope="col">Amount </th>
+							<th scope="col">Date</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+						{% for payment in payments %}
+				    <tr>
+				      <td>{{payment.payment_id}}</td>
+                      <td>{{payment.order.order_number}}</td>
+                      <td>- ${{payment.amount_paid}}</td>
+					  <td>{{payment.created_at}}</td>
+				    </tr>
+				       {% endfor %}
+
+				  </tbody>
+				</table>
+			</div>
+
+			</div> <!-- row.// -->
+		</div> <!-- card-body .// -->
+
+		</article> <!-- order-group.// -->
+	</main>
+</div> <!-- row.// -->
+</div>
+
+
+</section>
+
+{% endblock %}

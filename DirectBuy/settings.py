@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'products',
     'order',
     'cart',
+    'Dashboard',
     'chat',
 ]
 
@@ -147,3 +148,5 @@ EMAIL_PORT=587
 #razorpay settings
 RAZOR_KEY_ID = "rzp_test_E1KoVM2Xw6oJZL"
 RAZOR_KEY_SECRET = "SAPZNtfdAEMlPZbXCc3KBZsu"
+# RAZOR_KEY_ID = "rzp_test_jrRaJwQtqkkYT7"
+# RAZOR_KEY_SECRET = "eNP7du3pd8YZ1ucTLp9Xhi0H"

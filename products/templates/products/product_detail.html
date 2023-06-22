@@ -47,7 +47,7 @@
         {{product.description}}
     </p>
     <form action='{{product.get_url}}' method='POST'>
-            {%csrf_token%}
+    {%csrf_token%}
     <dl class="row">
       <dt class="col-sm-6">Vendor :{{product.vendor.full_name}}</dt>    
      
