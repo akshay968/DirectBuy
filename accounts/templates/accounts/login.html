@@ -1,48 +1,69 @@
-{% extends 'base.html' %}
-
-{% block title %}
-Login | DB
-{% endblock %}
-{% block css %}
-{% load static %}  
-{% comment %} <link rel="stylesheet" href="{% static 'css/loginpage1.css' %}"> {% endcomment %}
-{% endblock %}
-{% block body %}  
-  <div class="row">
-    <div class="col-5 side-img" >
-        <!-- <img src="slide2.png" alt=""> -->
-    </div>
-    <div class="col-7 login_div">
-       
-        <div class="container">
-            <div class="text-end pt-4 dont-have">
-                <p>Don't have an account?<a href="{% url 'signup' %}" class="btn ms-3 ps-3 pe-3 btn-outline-db">Sign Up</a></p>
-            </div>
-            <div class="formcontainer  container">
-        <form action='' method="POST" class="loginform"  >
+{% extends 'base2.html' %} {% block title %} Login | DB {% endblock %} 
+{% block css %} {% load static %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+<link rel="stylesheet" href="{% static 'css/account.css' %}" />
+{% endblock %} 
+{% block body %}
+<div class="row">
+  <div class="col-5 side-img">
+    <a>
+      <img class="fixed-logo" src="{% static 'imgs/logo_white.png'%}" alt="" />
+    </a>
+    <img src="{% static 'imgs/accnt_img.png' %}" alt="" />
+  </div>
+  <div class="col-7 login_div">
+    <div class="container">
+      <div class="text-end pt-4 me-4 dont-have">
+        <p>
+          Don't have an account?<a
+            href="{% url 'signup' %}"
+            class="btn ms-3 ps-3 pe-3 btn-outline-db"
+            >Sign Up</a
+          >
+        </p>
+      </div>
+      <div class="formcontainer container pt-5">
+        <form action="" method="POST" class="loginform mt-5">
           {% csrf_token %}
-            <h3>LOG IN</h3>
-            <div class="mb-4 email-div">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1 " for ='email'name='email' aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" for ='password' name='password'>
-            </div>
-          
-
-            <div class="btnforgot mt-4">
-              <a href="" class="pt-2 forgotpassword" >forgotpassword?</a>
-              
-            <button  type="submit" class="btn btn-cta ps-4 pe-4 ">Log In</button>
-              
+          <h3>LOG IN</h3>
+          <div class="mb-4 email-div">
+            <label for="exampleInputEmail1" class="form-label"
+              >Email address</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1 "
+              for="email"
+              name="email"
+              aria-describedby="emailHelp"
+            />
           </div>
-          </form>
-        </div>
-        </div>
-    </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Password</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              for="password"
+              name="password"
+            />
+          </div>
 
-  </div>             
-  {% endblock %}
-  
+          <div class="d-flex justify-content-between">
+            <div class="btnforgot mt-4">
+              <a href="" class="pt-2 forgotpassword">forgot password?</a>
+            </div>
+              <button type="submit" class="btn btn-cta btn-accnt m-3 me-5 ps-4 pe-4">
+                Log In
+              </button>
+           
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

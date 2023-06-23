@@ -1,0 +1,54 @@
+body{
+    font-family: 'DM Sans', sans-serif;
+}
+
+.dont-have{
+    color: #848484;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+}
+
+.btn-outline-db{
+    border: 1px solid #56A2A7;
+    font-size: 14px;
+    border-radius: 2px;
+    color: #848484;
+}
+
+.fixed-logo{
+    position: fixed;
+    top: 20px;
+    left: 30px;
+    background-color: #ffffff00;
+    width: 80px;
+}
+
+.formcontainer{
+    max-width: 560px;
+    display: block;
+    margin: 0 auto;
+}
+
+.formcontainer input{
+    background-color: #F0F0F0;
+    border-radius: 2px;
+    border: #F0F0F0 solid 4px;
+    width: 90%;
+}
+
+.formcontainer label{
+    color: #B9B9B9;
+    line-height: 10px;
+    font-weight: 200;
+}
+
+.btnforgot a{
+    color: #454545;
+}
+
+.btn-accnt{
+    background-color: #56A2A7;
+    color: #FFFFFF;
+    border-radius: 2px;
+}
+

@@ -1,15 +1,19 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 {% block title %}
 SignUp | DB
 {% endblock %}
 {% block css %}
 {% load static %}   
-{% comment %} <link rel="stylesheet" href="{% static 'css/signup.css' %}"> {% endcomment %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'css/account.css' %}">
 {% endblock %}
 {% block body %}  
 <div class="row">
   <div class="col-5 side-img" >
-      <!-- <img src="slide2.png" alt=""> -->
+    <a>
+    <img class="fixed-logo" src="{% static 'imgs/logo_white.png'%}" alt="" >
+    </a>
+      <img src="{% static 'imgs/accnt_img.png' %}" alt=""> 
   </div>
   <div class="col-7 signup_div">
      
@@ -18,7 +22,7 @@ SignUp | DB
               <p>Already have an account?<a href="{% url 'login' %}" class="btn ms-3 ps-3 pe-3 btn-outline-db">Login</a></p>
           </div>
           <div class="formcontainer  container">
-      <form  action='' method='POST' class="signupform">
+      <form  action='' method='POST' class="signupform mt-5 pt-5">
         {% csrf_token %}
           <h3>SIGN UP</h3>
           <div class="form-row row mb-4">
@@ -37,24 +41,24 @@ SignUp | DB
                {{form.email}}
             </div>
             <div class="col">
-                <label for="exampleInputPassword1" class="form-label">comfirm password</label>
+                <label for="exampleInputPassword1" class="form-label">Phone Number</label>
                 {{form.phone_number}}
                </div>
           </div>
           
           <div class="form-row row mb-4">
               <div class="col">
-                   <label for="exampleInputPassword1" class="form-label">password</label>
+                   <label for="exampleInputPassword1" class="form-label">Password</label>
                    {{form.password}}
                 </div>
               <div class="col">
-                  <label for="exampleInputPassword1" class="form-label">comfirm password</label>
+                  <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
                   {{form.confirm_password}}
                  </div>
             </div>
          
           <div class="text-end">
-          <button type="submit" class="btn btn-cta ps-4 pe-4 ">Sign Up</button>
+          <button type="submit" class="btn btn-cta ps-4 me-4 pe-4 btn-accnt">Sign Up</button>
         </div>
         </form>
       </div>
