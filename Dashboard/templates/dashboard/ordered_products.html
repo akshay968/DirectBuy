@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
-
-
+{%load static%}
+{%block css%}
+<link rel="stylesheet" href="{%static 'css/rating_stars.css'%}">
+{% endblock %}
 {% block body %}
 
 <section class="section-conten padding-y bg">
@@ -15,7 +17,7 @@
 			<strong class="d-inline-block mr-3">Your order history</strong>
 
 		</header>
-
+      
         <div class="table-responsive">
             <table class="table table-hover">
             
@@ -35,23 +37,63 @@
                    
                     <td> {{item.vendor.name}} </td>
 
-                    <td width="200"> <div id="reviewFormPopup" style="display: none;">
-                        <form id="reviewForm" method="post" action="">
-                          <!-- Form fields for rating, review text, etc. -->
-                          <input type="hidden" name="product_id" id="productID" value="">
-                          <input type="text" name="review" id="reviewText" placeholder="Enter your review">
-                          <input type="number" name="rating" id="ratingInput" min="1" max="5" placeholder="Enter rating (1-5)">
-                          <button type="submit">Submit Review</button>
-                        </form>
-                      </div>  
-                      <button id="rateProductBtn">Rate the Product</button>
-
-                    <form  method="POST" action="{% url 'contact_vendor' vendor_id=item.vendor.id %}">
+                       <td width="200">
+                      {% comment %} <button id="rateProductBtn">Rate the Product</button> {% endcomment %}
+                      <form  method="POST" action="{% url 'contact_vendor' vendor_id=item.vendor.id %}">
                         {% csrf_token %}
                         <input type="hidden" name="product_id" value="{{ item.product.id }}">
                         <!-- other form fields here -->
                         <td width="200"> <button><type ="submit" class="btn ">contact Vendor</button>  
                     </form>
+                  </td>
+                  <td width="200">
+
+             {% if item.is_rated is False%}
+				<form action="{% url 'submitreview' %}" method="POST"  >
+					{% csrf_token %}
+
+          
+					<h5>Write Your Review</h5>
+
+					<div>
+						<!-- Rating stars -->
+						<label>How do you rate this product?</label>
+						<br>
+						<div class="rate">
+							<input type="radio" name="rating" id="rating10" value="5" required /><label for="rating10" title="5"></label>
+							<input type="radio" name="rating" id="rating9" value="4.5" required /><label for="rating9" title="4.5" class="half"></label>
+							<input type="radio" name="rating" id="rating8" value="4" required /><label for="rating8" title="4"></label>
+							<input type="radio" name="rating" id="rating7" value="3.5" required /><label for="rating7" title="3.5" class="half"></label>
+							<input type="radio" name="rating" id="rating6" value="3" required /><label for="rating6" title="3"></label>
+							<input type="radio" name="rating" id="rating5" value="2.5" required /><label for="rating5" title="2.5" class="half"></label>
+							<input type="radio" name="rating" id="rating4" value="2" required /><label for="rating4" title="2"></label>
+							<input type="radio" name="rating" id="rating3" value="1.5" required /><label for="rating3" title="1.5" class="half"></label>
+							<input type="radio" name="rating" id="rating2" value="1" required /><label for="rating2" title="1"></label>
+							<input type="radio" name="rating" id="rating1" value="0.5" required /><label for="rating1" title="0.5" class="half"></label>
+						</div>
+<br>
+						Review:
+						<textarea name="review" rows="4" class="form-control"></textarea>
+						<br>
+					
+						<input type="submit" value="Submit Review" class="btn btn-primary">
+						<input type="hidden" name="orderedproduct_id" value="{{item.id}}" class="btn btn-primary">
+            <input type="hidden" name="product_id" value="{{item.product.id}}" class="btn btn-primary">
+
+</div>
+{%else%}
+<p>Rated</p>
+<div class="rating-star">
+  <span>
+    <i class="fa fa-star{% if item.review.rating == 0.5 %}-half-o{% elif item.review.rating < 1 %}-o {% endif %}" aria-hidden="true"></i>
+    <i class="fa fa-star{% if item.review.rating == 1.5 %}-half-o{% elif item.review.rating < 2 %}-o {% endif %}" aria-hidden="true"></i>
+    <i class="fa fa-star{% if item.review.rating == 2.5 %}-half-o{% elif item.review.rating < 3 %}-o {% endif %}" aria-hidden="true"></i>
+    <i class="fa fa-star{% if item.review.rating == 3.5 %}-half-o{% elif item.review.rating < 4 %}-o {% endif %}" aria-hidden="true"></i>
+    <i class="fa fa-star{% if item.review.rating == 4.5 %}-half-o{% elif item.review.rating < 5 %}-o {% endif %}" aria-hidden="true"></i>
+  </span>
+</div>
+  
+{% endif%}
 
                     
                     </td>

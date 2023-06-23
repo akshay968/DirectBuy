@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect,HttpResponse
 from django.views import View
-from .models import Product,Variant
+from .models import Product,Variant,ReviewRating
 from .models import Category,Account
 from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.forms import modelformset_factory
 from cart.views import add_cart
 from .forms import CartItemForm
+
 # Create your views here.
 
 def startpage(request):
@@ -129,24 +130,29 @@ def product_detail(request,product_slug):
      product=Product.objects.get(slug=product_slug)
      if request.method=='POST':
         cartitem_form=CartItemForm(product.id,request.POST)
+        reviews=ReviewRating.objects.filter(product=product)
         if cartitem_form.is_valid():
             variant=cartitem_form.clean_variant()
             quantity=cartitem_form.cleaned_data.get('quantity')
             return add_cart(request,product.pk,variant.pk,quantity)
-          
         else:
              context={
             'product':product,
             'cartitem_form':cartitem_form,
+            'reviews':reviews,
+             'reviews_count':reviews.count(),
         }
     
         return render (request,'products/product_detail.html',context)       
 
      else:   
         cartitem_form=CartItemForm(product.id)
+        reviews=ReviewRating.objects.filter(product=product)
         context={
             'product':product,
             'cartitem_form':cartitem_form,
+            'reviews':reviews,
+             'reviews_count':reviews.count(),
         }
     
      return render (request,'products/product_detail.html',context)

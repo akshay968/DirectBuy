@@ -5,8 +5,10 @@ from accounts.models import Account
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages, auth
 from django.http import HttpResponse
-from order.models import Payment
+from order.models import Payment,OrderedProduct
 from django.db.models import Q
+from products.forms import ReviewForm
+from products.models import Product,ReviewRating
 
 # from cart.views import _cart_id
 # from carts.models import Cart, CartItem
@@ -85,3 +87,18 @@ def order_detail(request, order_id):
         'subtotal': subtotal,
     }
     return render(request, 'dashboard/order_detail.html', context)
+
+def submit_rating(request):
+    review=ReviewRating()
+    review.rating=request.POST['rating']
+    review.review=request.POST['review']
+    user=request.user
+    product=Product.objects.get(id=request.POST['product_id'])
+    orderedproduct=OrderedProduct.objects.get(id=request.POST['orderedproduct_id'])
+    review.user=user
+    review.product=product
+    review.save()
+    orderedproduct.review=review
+    orderedproduct.is_rated=True
+    orderedproduct.save()
+    return redirect('OrderedProducts')

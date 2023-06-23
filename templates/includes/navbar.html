@@ -15,7 +15,7 @@
         </button>
 
         <div class="justify-content-end">
-    
+
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 
             <form class="d-flex form">
@@ -24,17 +24,17 @@
                     <img src="{% static 'imgs/search.png' %}" width="34px" alt="">
                 </button>
             </form>
-            
+
             {% if request.user.id is None %}
             <a href="{% url 'signup' %}" class="btn btn-border ms-3 ps-3 pe-3 btn-outline-db">Sign Up</a>
             <a href="{% url 'login' %}" class="btn btn-border ms-3 ps-3 pe-3 btn-outline-db">Login</a>
-          
+
             {% else %}
 
             <a href="{% url 'sell' %}" class="btn btn-border ms-3 ps-3 pe-3 btn-outline-db">Sell</a>
-            
+
             <a href="{% url 'messages'%}" class="btn ms-3 ps-3 pe-3 btn-border btn-outline-db">Chat</a>
-          
+
             {% endif %}
 
 
@@ -53,7 +53,7 @@
             {% endif %}
         </div>
         </div>
-         
+
 
 
     </div>

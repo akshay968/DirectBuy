@@ -1,6 +1,6 @@
 from django.db import models
 from accounts.models import Account
-from products.models import Product,Variant
+from products.models import Product,Variant,ReviewRating
 # Create your models here.
 
 class Payment(models.Model):
@@ -54,6 +54,7 @@ class OrderedProduct(models.Model):
     order= models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
     is_rated=models.BooleanField(blank=True,default=False)
     rating = models.FloatField(default=0)
+    review=models.ForeignKey(ReviewRating,on_delete=models.SET_NULL,blank=True,null=True)
     STATUS = (
             ('New','New'),
             ('OrderReceived', 'OrderReceived'),
