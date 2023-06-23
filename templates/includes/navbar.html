@@ -1,8 +1,11 @@
 {% load static %}
-<nav class="navbar ps-4 pe4 border-bottom navbar-expand-lg navbar-light bg-light d-flex">
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+{% endblock %}
+<nav class="navbar ps-4 pe-4 border-bottom navbar-expand-lg navbar-light bg-white d-flex">
     <div class="container-fluid d-flex">
-        <a class="navbar-brand p-2" href="#">
-            <img src="logo.png" width="50px" alt="">
+        <a class="navbar-brand p-0 d-none d-lg-block" href="">
+            <img src="{% static 'imgs/logo_light.png' %}" width="50px" alt="">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -11,48 +14,54 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <div class="justify-content-end">
+    
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 
-            <div class="justify-content-end">
-                <form class="d-flex form  rounded p-1">
-                    <input class="form-control me-2" type="search"  aria-label="Search">
-                    <button class="btn btn-search" type="submit">
-                        <img src="search.png" width="20px" alt="">
-                    </button>
-                </form>
-            </div>
+            <form class="d-flex form">
+                <input class="form-control form-search me-2 p-1" type="search"  aria-label="Search">
+                <button class="btn btn-search p-05 " type="submit">
+                    <img src="{% static 'imgs/search.png' %}" width="34px" alt="">
+                </button>
+            </form>
             
             {% if request.user.id is None %}
-            <a href="{% url 'signup' %}" class="btn ms-3 ps-3 pe-3 btn-outline-db">Sign Up</a>
-            <a href="{% url 'login' %}" class="btn ms-3 ps-3 pe-3 btn-outline-db">Login</a>
+            <a href="{% url 'signup' %}" class="btn btn-border ms-3 ps-3 pe-3 btn-outline-db">Sign Up</a>
+            <a href="{% url 'login' %}" class="btn btn-border ms-3 ps-3 pe-3 btn-outline-db">Login</a>
           
             {% else %}
 
-            <a href="{% url 'sell' %}" class="btn ms-3 ps-3 pe-3 btn-outline-db">Sell</a>
+            <a href="{% url 'sell' %}" class="btn btn-border ms-3 ps-3 pe-3 btn-outline-db">Sell</a>
             
-            <a href="{% url 'messages'%}" class="btn ms-3 ps-3 pe-3 btn-outline-db">Chat</a>
+            <a href="{% url 'messages'%}" class="btn ms-3 ps-3 pe-3 btn-border btn-outline-db">Chat</a>
           
-            <div class="btn rounded-circle btn-profile pt-2 pb-2">
-                AK
-            </div>
-            <a href="{% url 'logout' %}"> Logout</a>
             {% endif %}
 
 
-
             {% comment %} <div class="btn cart-btn ps-3 pe-3 ms-4 me-4"> {% endcomment %}
-                <a href="{% url 'cart' %}" class="btn ms-3 ps-3 pe-3 btn-outline-db">CART</a>
+                <a href="{% url 'cart' %}" class="btn btn-color ms-3 ps-3 pe-3 me-3 btn-outline-db">CART</a>
             {% comment %} </div> {% endcomment %}
+
+            {% if request.user.id %}
+            <div class="btn btn-profile text-center" data-bs-toggle="dropdown" aria-expanded="false">
+                AK
+            </div>
+            <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownMenuButton1">
+                <li><a href="{% url 'dashboard' %}"> Dashboard</a></li>
+                <li><a href="{% url 'logout' %}"> Logout</a></li>
+              </ul>
+            {% endif %}
+        </div>
         </div>
          
 
 
     </div>
 </nav>
-<div class="category_nav1">
-  <div >
+<div class="category_nav">
+  <div class="m-4">
     {% for category in links %}
-        <a href='{{category.get_url}}'>{{ category.category_name }}</a>
+        <a class="me-3" href='{{category.get_url}}'>{{ category.category_name }}</a>
     {%endfor%}
   </div>
 
