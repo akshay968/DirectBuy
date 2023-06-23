@@ -1,0 +1,33 @@
+.card img{
+    height: 300px;
+    overflow: hidden;
+}
+
+.card{
+    display: block;
+    margin: 0 auto;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+.card-title, .rating, .card-text, .price{
+    text-decoration: none !important;
+    color: #000000;
+}
+
+.price{
+    font-size: 18px;
+}
+
+.old-price{
+    font-size: 14px;
+    color: #737373;
+    text-decoration: line-through;
+}
+
+.offer{
+    font-size: 14px;
+    color: #56A2A7;
+}

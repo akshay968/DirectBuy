@@ -1,28 +1,29 @@
 {%extends 'base.html'%}
-{% block css%}
-
-{% comment %} {% load static %}
-<link  href="{% static 'products/global.css' %}" rel="stylesheet"> {% endcomment %}
+{% load static %}
+{% block css %}
+ {% load static %}
+<link rel="stylesheet" href="{% static 'products/product.css' %}">
 {% endblock%}
 {% block body%}
-<div class="row">
+<div class="wrapper m-3 mt-5">
+<div class="row mt-2 mb-2">
  {% for product in products%}
- <div class="col-md-4 product_card1">
-    <figure class="card card-product-grid ">
-        <div class="img-wrap">
-            <a href="{{ product.get_url }}"><img src="{{product.image.url}}"></a>
-        </div> 
-        <figcaption class="info-wrap">
-            <div class="fix-height">
-                <a href="{{ product.get_url }}" class="title">ATX Jeans</a>
-                <div class="price-wrap mt-2">
-                    <span class="price">$ 199</span>
-                </div> <!-- price-wrap.// -->
-            </div>
-            <a href="{{ product.get_url }}" class="btn btn-block btn-primary">View Details </a>
-        </figcaption>
-    </figure>
+ <div class="col-lg-3 col-md-4 col-sm-6 mb-5 column">
+  <a href="{{ product.get_url }}" class="">
+ <div class="card" style="width: 18rem;">
+    <img src="{{product.image.url}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+      <h5 class="card-title">{{product.name}}</h5>
+      <h5 class="rating">4.5</h5>
+      </div>
+      <p class="card-text">Some quick example text.</p>
+      <h5 class="price"> Rs. 2550 <span class="old-price">Rs. 3695</span> <span class="offer"> (31% off)</span> </h5>
+    </div>
+  </a>
   </div>
+</div>
 {% endfor %}
+</div>
 </div>
 {% endblock%}
