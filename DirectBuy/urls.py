@@ -18,7 +18,8 @@ from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', include('admin_honeypot.urls'),name='admin_honeypot'),
+    path('secureadmin/', admin.site.urls),
     path('accounts/',include('accounts.urls')),
     path('cart/',include('cart.urls')),
     path('order/',include('order.urls')),

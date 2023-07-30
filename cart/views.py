@@ -25,6 +25,7 @@ def index(request):
     quantity=0
     if request.user.is_authenticated:
             cart_items = CartItem.objects.filter(user=request.user)
+            # request['session'].cart=cart_
             context = {
             'cart_items': cart_items,
             }
