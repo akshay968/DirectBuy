@@ -31,3 +31,8 @@ a{
     font-size: 14px;
     color: #56A2A7;
 }
+
+.card .img-big-wrap img{
+    height: 500px !important;
+    max-width: 500px;
+}

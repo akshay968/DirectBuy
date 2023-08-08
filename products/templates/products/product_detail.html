@@ -2,23 +2,21 @@
 {%load static%}
 
 {% block css%}
-<link rel="stylesheet" href={%static 'css/rating_stars.css' %}>
+<link rel="stylesheet" href="{%static 'css/rating_stars.css' %}">
+<link rel="stylesheet" href="{% static 'products/product.css' %}">
 {% endblock%}
 {% block body %}
 <section class="section-content bg-white padding-y">
     <div class="container">
-    
-    <!-- ============================ ITEM DETAIL ======================== -->
         <div class="row">
             <aside class="col-md-6">
     <div class="card">
     <article class="gallery-wrap"> 
         <div class="img-big-wrap">
           <div> <a href="#"><img src="{{product.image.url}}"></a></div>
-        </div> <!-- slider-product.// -->
-        <!-- slider-nav.// -->
-    </article> <!-- gallery-wrap .end// -->
-    </div> <!-- card.// -->
+        </div> 
+    </article> 
+    </div> 
             </aside>
             <main class="col-md-6">
     <article class="product-info-aside">
